@@ -20,7 +20,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
-
+src/main/resources/cred.properties
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
