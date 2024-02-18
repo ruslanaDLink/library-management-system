@@ -1,5 +1,5 @@
 package project.library.model;
 
-public class Reader {
+public class User {
 
 }
