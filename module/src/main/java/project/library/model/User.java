@@ -13,12 +13,11 @@ public class User {
     private Address address;
     private boolean hasGuardianPermission;
 
-    public User(String name, int age, String phoneNumber, String email, Address address) {
+    public User(String name, int age, String phoneNumber, String email) {
         this.name = name;
         this.age = age;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.address = address;
     }
 
     public boolean isNeededGuardianPermission(User user){
