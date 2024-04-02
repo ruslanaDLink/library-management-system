@@ -1,4 +1,4 @@
-package project.library.services;
+package project.library.service;
 
 import project.library.model.User;
 
