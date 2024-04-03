@@ -21,4 +21,5 @@ public enum Genre {
     POETRY,
     SELF_POETRY,
     TRUE_CRIME,
+    NOVEL
 }

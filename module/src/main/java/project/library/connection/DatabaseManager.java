@@ -13,15 +13,23 @@ public class DatabaseManager {
     private static final String PASSWORD = Credentials.getPASSWORD();
 
 
-    public Connection connectToDatabase() {
+    private DatabaseManager() {
+    }
+
+    public static DatabaseManager getInstance() {
+        if (instance == null) {
+            instance = new DatabaseManager();
+        }
+        return instance;
+    }
+
+    public static Connection connectToDatabase() {
         try {
             Class.forName("org.h2.Driver");
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             connection.close();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
         return connection;
     }

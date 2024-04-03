@@ -14,7 +14,6 @@ import java.util.List;
 
 public class LibraryMain {
     public static List<Book> books;
-    private DatabaseManager databaseManager;
 
     public static void main(String[] args) throws BookNotFoundException {
         UserService userService = new UserService();
@@ -26,11 +25,10 @@ public class LibraryMain {
 
     public LibraryMain(){
         books = new ArrayList<>();
-        databaseManager = new DatabaseManager();
     }
 
     public List<Book> getAllBooksFromDatabase() {
-        try (Connection connection = databaseManager.connectToDatabase()) {
+        try (Connection connection = DatabaseManager.connectToDatabase()) {
             String selectAllBooksStatement = "SELECT * FROM BOOK;";
             PreparedStatement preparedStatement = connection.prepareStatement(selectAllBooksStatement);
             ResultSet resultSet = preparedStatement.executeQuery();
