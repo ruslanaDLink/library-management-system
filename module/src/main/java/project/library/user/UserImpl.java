@@ -3,18 +3,22 @@ package project.library.user;
 import project.library.Library;
 import project.library.exception.BookNotFoundException;
 import project.library.model.Book;
+import project.library.mybooks.MyBooks;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class UserImpl implements UserInterface {
+public class UserImpl implements UserInterface, MyBooks {
     private static final Logger LOGGER = Logger.getLogger(UserImpl.class.getName());
 
-    private final List<Book> myBooks;
-    private final List<Book> libraryBooks;
+    private List<Book> libraryBooks;
+    private List<Book> myBooks;
+    private List<Book> readBooks;
 
-    public UserImpl(List<Book> myBooks) {
-        this.myBooks = myBooks;
+    public UserImpl() {
+        myBooks = new ArrayList<>();
+        readBooks = new ArrayList<>();
         Library library = new Library();
         libraryBooks = library.books;
     }
@@ -57,7 +61,7 @@ public class UserImpl implements UserInterface {
                 return libraryBook;
             }
         }
-        LOGGER.info("Not found anything.");
+        LOGGER.info("Title not found " + title);
         return null;
     }
 
@@ -69,7 +73,7 @@ public class UserImpl implements UserInterface {
                 return libraryBook;
             }
         }
-        LOGGER.info("Not found anything.");
+        LOGGER.info("Author not found " + author);
         return null;
     }
 
@@ -81,16 +85,28 @@ public class UserImpl implements UserInterface {
                 return libraryBook;
             }
         }
-        LOGGER.info("Not found anything.");
+        LOGGER.info("Genre not found " + genre);
         return null;
     }
+
 
     @Override
     public void returnBack(Book book) {
         if (myBooks.contains(book)) {
             myBooks.remove(book);
+            readBooks.add(book);
             libraryBooks.add(book);
-            LOGGER.info("Returned book to library " + book);
+            LOGGER.info(book + " book returned to library.");
         }
+    }
+
+    @Override
+    public List<Book> getCartBooks() {
+        return myBooks;
+    }
+
+    @Override
+    public List<Book> getReadBooks() {
+        return readBooks;
     }
 }
