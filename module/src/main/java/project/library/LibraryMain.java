@@ -3,7 +3,6 @@ package project.library;
 import project.library.connection.DatabaseManager;
 import project.library.exception.BookNotFoundException;
 import project.library.model.Book;
-import project.library.service.UserService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,11 +15,6 @@ public class LibraryMain {
     public static List<Book> books;
 
     public static void main(String[] args) throws BookNotFoundException {
-        UserService userService = new UserService();
-        LibraryMain library = new LibraryMain();
-//        Book book = new Book("And Then There Were None", "Agatha Christie", "978-0062073488", Genre.THRILLER);
-//        userService.addBookToList(book);
-        System.out.println(library.getAllBooksFromDatabase());
     }
 
     public LibraryMain(){

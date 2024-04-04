@@ -1,36 +1,26 @@
-package project.library;
+package project.library.services.servicesimpl;
 
+import project.library.Library;
 import project.library.connection.DatabaseManager;
-import project.library.exception.UserInfoMissingException;
 import project.library.model.Book;
-import project.library.model.User;
 import project.library.model.book.features.Genre;
+import project.library.services.LibrarianBookServices;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
 import java.util.List;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-public class Librarian {
-    private static final Logger LOGGER = Logger.getLogger(Librarian.class.getName());
+public class LibrarianBookHelper implements LibrarianBookServices {
+    private static final Logger LOGGER = Logger.getLogger(LibrarianBookHelper.class.getName());
 
     private Connection connection = DatabaseManager.connectToDatabase();
     private Library library;
     private List<Book> books;
-    private List<User> users;
 
-    //task
-
-    //should manage book list
-    //should manage user list
-
-
-    public Librarian() {
+    public LibrarianBookHelper() {
         library = new Library();
         books = library.books;
     }
@@ -72,32 +62,8 @@ public class Librarian {
         return organisedBooks;
     }
 
-    public List<User> getAllUsers() {
-        return users;
-    }
-
-    public User retrieveUserInfo(Long id) throws UserInfoMissingException {
-        User user = users.stream().filter(reader -> Objects.equals(reader.getId(), id)).findFirst().orElseThrow(UserInfoMissingException::new);
-        LOGGER.info("User was successfully found");
-        return user;
-    }
-
-    public void registerUser(User user) {
-        if (users.contains(user)) {
-            LOGGER.info("User is already registered.");
-        }
-        if (user == null) {
-            LOGGER.info("Information is intended for the user's registration.");
-        } else {
-            LOGGER.info("Successfully registered user " + user.getName() + "!");
-            users.add(user);
-        }
-    }
-
-    public void removeUser(User user) {
-        if (user != null && users.contains(user)) {
-            users.remove(user);
-            LOGGER.info("Successfully removed user " + user.getName() + ".");
-        }
+    @Override
+    public boolean validateBook(Book book) {
+        return book != null && books.contains(book);
     }
 }

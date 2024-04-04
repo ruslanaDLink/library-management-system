@@ -2,6 +2,7 @@ package project.library;
 
 import project.library.model.Book;
 import project.library.model.book.features.Genre;
+import project.library.services.servicesimpl.LibrarianBookHelper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 
 public class Library {
     public List<Book> books;
-    private Librarian librarian;
+    private LibrarianBookHelper librarianBookHelper;
 
     public Library() {
 
@@ -17,7 +18,7 @@ public class Library {
 
     public void init() {
         books = new ArrayList<>();
-        librarian = new Librarian();
+        librarianBookHelper = new LibrarianBookHelper();
     }
 
     public void fillCollection() throws SQLException {
@@ -27,10 +28,10 @@ public class Library {
         Book agathaChristiePosternFate = new Book("Postern of Fate", "Agatha Christie", Genre.DETECTIVE, 1973);
 
 
-        librarian.addNewBookToCollection(agathaChristiePosternFate);
-        librarian.addNewBookToCollection(agathaChristieDestinationUnknown);
-        librarian.addNewBookToCollection(agathaChristieTheSecretOfChimneys);
-        librarian.addNewBookToCollection(agathaChristieTheManBrownSuit);
+        librarianBookHelper.addNewBookToCollection(agathaChristiePosternFate);
+        librarianBookHelper.addNewBookToCollection(agathaChristieDestinationUnknown);
+        librarianBookHelper.addNewBookToCollection(agathaChristieTheSecretOfChimneys);
+        librarianBookHelper.addNewBookToCollection(agathaChristieTheManBrownSuit);
     }
 
     public static void main(String[] args) throws SQLException {

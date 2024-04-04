@@ -4,6 +4,7 @@ import project.library.Library;
 import project.library.exception.BookNotFoundException;
 import project.library.model.Book;
 import project.library.mybooks.MyBooks;
+import project.library.services.servicesimpl.LibrarianBookHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,22 +16,25 @@ public class UserImpl implements UserInterface, MyBooks {
     private List<Book> libraryBooks;
     private List<Book> myBooks;
     private List<Book> readBooks;
+    private Library library;
+    private LibrarianBookHelper librarianBookHelper;
 
     public UserImpl() {
         myBooks = new ArrayList<>();
         readBooks = new ArrayList<>();
-        Library library = new Library();
+        library = new Library();
+        library = new Library();
         libraryBooks = library.books;
     }
 
     @Override
     public void add(Book book) throws BookNotFoundException {
-        if (libraryBooks.contains(book) && book != null) {
+        if (librarianBookHelper.validateBook(book) && book != null) {
             LOGGER.info("Added book to cart " + "#" + book.getId() + " \"" + book.getTitle() + "\"");
             myBooks.add(book);
         } else {
             LOGGER.warning("Failed to add book " + book);
-            throw new BookNotFoundException("404 ERROR...");
+            throw new BookNotFoundException("Invalid argument.");
         }
     }
 
