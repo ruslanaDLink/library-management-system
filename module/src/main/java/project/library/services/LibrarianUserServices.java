@@ -14,4 +14,6 @@ public interface LibrarianUserServices {
     User retrieveUserInfo(Long id) throws UserInfoMissingException;
 
     List<User> getAllUsers();
+
+    boolean isRegistered(User user);
 }

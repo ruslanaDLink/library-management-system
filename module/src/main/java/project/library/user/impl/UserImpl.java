@@ -1,10 +1,11 @@
-package project.library.user;
+package project.library.user.impl;
 
 import project.library.Library;
 import project.library.exception.BookNotFoundException;
 import project.library.model.Book;
 import project.library.mybooks.MyBooks;
 import project.library.services.servicesimpl.LibrarianBookHelper;
+import project.library.user.UserInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class UserImpl implements UserInterface, MyBooks {
         myBooks = new ArrayList<>();
         readBooks = new ArrayList<>();
         library = new Library();
-        library = new Library();
+        librarianBookHelper = new LibrarianBookHelper();
         libraryBooks = library.books;
     }
 

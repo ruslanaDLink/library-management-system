@@ -9,6 +9,7 @@ import project.library.services.LibrarianUserServices;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class LibrarianUserHelper implements LibrarianUserServices {
@@ -16,7 +17,7 @@ public class LibrarianUserHelper implements LibrarianUserServices {
 
     private Library library;
     private List<Book> books;
-    private List<User> users;
+    public List<User> users;
 
     public LibrarianUserHelper() {
         library = new Library();
@@ -25,15 +26,16 @@ public class LibrarianUserHelper implements LibrarianUserServices {
     }
 
     @Override
-    public void registerUser(User user) {
-        if (users.contains(user)) {
-            LOGGER.info("User is already registered.");
+    public void registerUser(User user){
+        if (isRegistered(user)) {
+            LOGGER.log(Level.INFO, "User is already registered.");
         }
         if (user == null) {
-            LOGGER.info("Information is intended for the user's registration.");
+            UserInfoMissingException e = new UserInfoMissingException();
+            LOGGER.log(Level.WARNING, e.getMessage());
         } else {
-            LOGGER.info("Successfully registered user " + user.getName() + "!");
             users.add(user);
+            LOGGER.log(Level.INFO, "REGISTERED SUCCESSFULLY " + user.getName() + "!");
         }
     }
 
@@ -46,6 +48,7 @@ public class LibrarianUserHelper implements LibrarianUserServices {
 
     @Override
     public List<User> getAllUsers() {
+        LOGGER.info("USER LIST");
         return users;
     }
 
@@ -55,5 +58,10 @@ public class LibrarianUserHelper implements LibrarianUserServices {
             users.remove(user);
             LOGGER.info("Successfully removed user " + user.getName() + ".");
         }
+    }
+
+    @Override
+    public boolean isRegistered(User user) {
+        return users.contains(user);
     }
 }
