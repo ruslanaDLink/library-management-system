@@ -13,13 +13,10 @@ public class Library {
     private LibrarianBookHelper librarianBookHelper;
 
     public Library() {
-
-    }
-
-    public void init() {
         books = new ArrayList<>();
         librarianBookHelper = new LibrarianBookHelper();
     }
+
 
     public void fillCollection() throws SQLException {
         Book agathaChristieTheSecretOfChimneys = new Book("The Secret Of Chimneys", "Agatha Christie", Genre.DETECTIVE, 1925);
@@ -36,7 +33,6 @@ public class Library {
 
     public static void main(String[] args) throws SQLException {
         Library library = new Library();
-        library.init();
         library.fillCollection();
     }
 }

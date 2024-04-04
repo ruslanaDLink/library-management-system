@@ -3,7 +3,7 @@ package project.library.user;
 import project.library.exception.BookNotFoundException;
 import project.library.model.Book;
 
-interface UserInterface {
+public interface UserInterface {
 
     void add(Book book) throws BookNotFoundException;
 
