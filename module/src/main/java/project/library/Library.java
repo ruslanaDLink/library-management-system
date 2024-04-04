@@ -25,10 +25,10 @@ public class Library {
         Book agathaChristiePosternFate = new Book("Postern of Fate", "Agatha Christie", Genre.DETECTIVE, 1973);
 
 
-        librarianBookHelper.addNewBookToCollection(agathaChristiePosternFate);
-        librarianBookHelper.addNewBookToCollection(agathaChristieDestinationUnknown);
-        librarianBookHelper.addNewBookToCollection(agathaChristieTheSecretOfChimneys);
-        librarianBookHelper.addNewBookToCollection(agathaChristieTheManBrownSuit);
+        librarianBookHelper.add(agathaChristiePosternFate);
+        librarianBookHelper.add(agathaChristieDestinationUnknown);
+        librarianBookHelper.add(agathaChristieTheSecretOfChimneys);
+        librarianBookHelper.add(agathaChristieTheManBrownSuit);
     }
 
     public static void main(String[] args) throws SQLException {

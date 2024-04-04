@@ -2,6 +2,7 @@ package project.library.services.servicesimpl;
 
 import project.library.Library;
 import project.library.connection.DatabaseManager;
+import project.library.exception.BookNotFoundException;
 import project.library.model.Book;
 import project.library.model.book.features.Genre;
 import project.library.services.LibrarianBookServices;
@@ -10,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,7 +27,7 @@ public class LibrarianBookHelper implements LibrarianBookServices {
         books = library.books;
     }
 
-    public void addNewBookToCollection(Book book) throws SQLException {
+    public void add(Book book) throws SQLException {
         if (book != null) {
             books.add(book);
 
@@ -49,6 +51,37 @@ public class LibrarianBookHelper implements LibrarianBookServices {
                 connection.close();
             }
         }
+    }
+
+    @Override
+    public Book read(Long id) throws BookNotFoundException {
+        for (Book book : books) {
+            if (Objects.equals(book.getId(), id)) {
+                return book;
+            } else {
+                LOGGER.info("ID not found " + id);
+                throw new BookNotFoundException("Failed to search book with id #" + id);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Book update(Long id, Book book) {
+        for (Book book1 : books) {
+            if (Objects.equals(book1.getId(), id)) {
+                book1.setTitle(book.getTitle());
+                book1.setAuthor(book.getAuthor());
+                book1.setGenre(book.getGenre());
+                book1.setPublishedYear(book.getPublishedYear());
+            }
+        }
+        return book;
+    }
+
+    @Override
+    public void delete(Book book) {
+        books.remove(book);
     }
 
     public List<Book> organiseBooks(Genre genre) {

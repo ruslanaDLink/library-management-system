@@ -41,7 +41,12 @@ public class LibrarianUserHelper implements LibrarianUserServices {
 
     @Override
     public User retrieveUserInfo(Long id) throws UserInfoMissingException {
-        User user = users.stream().filter(reader -> Objects.equals(reader.getId(), id)).findFirst().orElseThrow(UserInfoMissingException::new);
+        User user = users
+                .stream()
+                .filter(reader -> Objects.equals(reader.getId(), id))
+                .findFirst()
+                .orElseThrow(UserInfoMissingException::new);
+
         LOGGER.info("User was successfully found");
         return user;
     }
