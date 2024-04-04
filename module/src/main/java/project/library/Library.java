@@ -10,25 +10,38 @@ import java.util.List;
 
 public class Library {
     public List<Book> books;
-    private LibrarianBookHelper librarianBookHelper;
 
     public Library() {
         books = new ArrayList<>();
-        librarianBookHelper = new LibrarianBookHelper();
     }
 
 
     public void fillCollection() throws SQLException {
-        Book agathaChristieTheSecretOfChimneys = new Book("The Secret Of Chimneys", "Agatha Christie", Genre.DETECTIVE, 1925);
-        Book agathaChristieTheManBrownSuit = new Book("The Man in the Brown Suit", "Agatha Christie", Genre.DETECTIVE, 1924);
-        Book agathaChristieDestinationUnknown = new Book("Destination Unknown", "Agatha Christie", Genre.NOVEL, 1954);
-        Book agathaChristiePosternFate = new Book("Postern of Fate", "Agatha Christie", Genre.DETECTIVE, 1973);
+        LibrarianBookHelper librarianBookHelper = new LibrarianBookHelper();
+
+        Book joanRowlingHarryPotter1Part = new Book(
+                "Harry Potter and the Philosopher’s Stone", "J.K.Rowling", Genre.FANTASY, 1997);
+        Book joanRowlingHarryPotter2Part = new Book(
+                "Harry Potter and the Chamber of Secrets", "J.K.Rowling", Genre.FANTASY, 1998);
+        Book joanRowlingHarryPotter3Part = new Book(
+                "Harry Potter and the Prisoner of Azkaban", "J.K.Rowling", Genre.FANTASY, 1999);
+        Book joanRowlingHarryPotter4Part = new Book(
+                "Harry Potter and the Goblet of Fire", "J.K.Rowling", Genre.FANTASY, 2000);
+        Book joanRowlingHarryPotter5Part = new Book(
+                "Harry Potter and the Order of the Phoenix", "J.K.Rowling", Genre.FANTASY, 2003);
+        Book joanRowlingHarryPotter6Part = new Book(
+                "Harry Potter and the Half-Blood Prince", "J.K.Rowling", Genre.FANTASY, 2005);
+        Book joanRowlingHarryPotter7Part = new Book(
+                "Harry Potter and the Deathly Hallows", "J.K.Rowling", Genre.FANTASY, 2007);
 
 
-        librarianBookHelper.add(agathaChristiePosternFate);
-        librarianBookHelper.add(agathaChristieDestinationUnknown);
-        librarianBookHelper.add(agathaChristieTheSecretOfChimneys);
-        librarianBookHelper.add(agathaChristieTheManBrownSuit);
+        librarianBookHelper.add(joanRowlingHarryPotter1Part);
+        librarianBookHelper.add(joanRowlingHarryPotter2Part);
+        librarianBookHelper.add(joanRowlingHarryPotter3Part);
+        librarianBookHelper.add(joanRowlingHarryPotter4Part);
+        librarianBookHelper.add(joanRowlingHarryPotter5Part);
+        librarianBookHelper.add(joanRowlingHarryPotter6Part);
+        librarianBookHelper.add(joanRowlingHarryPotter7Part);
     }
 
     public static void main(String[] args) throws SQLException {

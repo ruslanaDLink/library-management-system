@@ -27,7 +27,6 @@ public class DatabaseManager {
         try {
             Class.forName("org.h2.Driver");
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            connection.close();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
