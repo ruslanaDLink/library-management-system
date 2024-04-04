@@ -3,6 +3,7 @@ package project.library.model;
 import lombok.Data;
 import project.library.model.book.features.Genre;
 
+
 @Data
 public class Book {
     private Long id;

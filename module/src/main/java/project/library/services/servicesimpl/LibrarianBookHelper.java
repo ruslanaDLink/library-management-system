@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,6 +28,7 @@ public class LibrarianBookHelper implements LibrarianBookServices {
         books = library.books;
     }
 
+    @Override
     public void add(Book book) throws SQLException {
         if (book != null) {
             books.add(book);
@@ -38,17 +40,17 @@ public class LibrarianBookHelper implements LibrarianBookServices {
             String nameGenre = genre.name();
             int year = book.getPublishedYear();
 
-            String insertStatement = "INSERT INTO BOOK(ID, TITLE, AUTHOR, RANK, PUBLISHED_YEAR) VALUES (?,?,?,?,?);";
+            Long aLong = generateId();
+
+            String insertStatement = "INSERT INTO BOOKS(ID, TITLE, AUTHOR, RANK, PUBLISHED_YEAR) VALUES (?,?,?,?,?);";
             try (PreparedStatement ps = connection.prepareStatement(insertStatement)) {
-                ps.setLong(1, id);
+                ps.setLong(1, aLong);
                 ps.setString(2, title);
                 ps.setString(3, author);
                 ps.setString(4, nameGenre);
                 ps.setInt(5, year);
 
                 ps.executeUpdate();
-
-                connection.close();
             }
         }
     }
@@ -98,5 +100,9 @@ public class LibrarianBookHelper implements LibrarianBookServices {
     @Override
     public boolean validateBook(Book book) {
         return book != null && books.contains(book);
+    }
+
+    public Long generateId(){
+        return new Random().nextLong(1_000_000);
     }
 }

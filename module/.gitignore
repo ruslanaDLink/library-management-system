@@ -37,3 +37,4 @@ build/
 ### Mac OS ###
 .DS_Store
 /src/main/java/project/library/connection/Credentials.java
+/src/main/resources/cfg.xml
