@@ -1,8 +1,15 @@
 package project.library.exception;
 
-public class UserInfoMissingException extends Exception{
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class UserInfoMissingException extends Exception {
+    private static final Logger LOGGER = LogManager.getLogger();
+    private static final String ERROR_MESSAGE = "USER WITHOUT INFO. PLEASE, COMPLY UNTIL ACCESS IS DENIED.";
+
     @Override
     public String getMessage() {
-        return "Nullable User. Fulfil additional information.";
+        LOGGER.error("> fulfil additional information.");
+        return ERROR_MESSAGE;
     }
 }
