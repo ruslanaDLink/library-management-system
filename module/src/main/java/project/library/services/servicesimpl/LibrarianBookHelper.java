@@ -10,6 +10,7 @@ import project.library.services.LibrarianBookServices;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
@@ -20,12 +21,9 @@ public class LibrarianBookHelper implements LibrarianBookServices {
     private static final Logger LOGGER = Logger.getLogger(LibrarianBookHelper.class.getName());
 
     private Connection connection = DatabaseManager.connectToDatabase();
-    private Library library;
-    private List<Book> books;
+    List<Book> books = new Library().books;
 
     public LibrarianBookHelper() {
-        library = new Library();
-        books = library.books;
     }
 
     @Override
@@ -33,7 +31,6 @@ public class LibrarianBookHelper implements LibrarianBookServices {
         if (book != null) {
             books.add(book);
 
-            Long id = book.getId();
             String title = book.getTitle();
             String author = book.getAuthor();
             Genre genre = book.getGenre();
@@ -87,9 +84,13 @@ public class LibrarianBookHelper implements LibrarianBookServices {
     }
 
     public List<Book> organiseBooks(Genre genre) {
-        System.out.println("Searching book with a specific genre: " + genre.name());
-        List<Book> books = library.books;
-        List<Book> organisedBooks = books.stream().filter(book -> book.getGenre() == genre).toList();
+        LOGGER.info("Searching books with a specific genre: " + genre.name());
+        List<Book> organisedBooks = new ArrayList<>();
+        for (Book book : books) {
+            if(book.getGenre().name().trim().equalsIgnoreCase(genre.name().trim())){
+                organisedBooks.add(book);
+            }
+        }
         if (organisedBooks.isEmpty()) {
             LOGGER.log(Level.WARNING, "Please, contact with help in case something is missing");
             throw new NullPointerException("Books are absent with genre: " + genre.name() + "..");
