@@ -26,7 +26,7 @@ public class LibrarianUserHelper implements LibrarianUserServices {
     }
 
     @Override
-    public void registerUser(User user){
+    public User registerUser(User user) {
         if (isRegistered(user)) {
             LOGGER.log(Level.INFO, "User is already registered.");
         }
@@ -37,18 +37,16 @@ public class LibrarianUserHelper implements LibrarianUserServices {
             users.add(user);
             LOGGER.log(Level.INFO, "REGISTERED SUCCESSFULLY " + user.getName() + "!");
         }
+        return user;
     }
 
     @Override
-    public User retrieveUserInfo(Long id) throws UserInfoMissingException {
-        User user = users
+    public String retrieveUserInfo(Long id) throws UserInfoMissingException {
+        LOGGER.info("USER'S INFORMATION");
+        return users
                 .stream()
                 .filter(reader -> Objects.equals(reader.getId(), id))
-                .findFirst()
-                .orElseThrow(UserInfoMissingException::new);
-
-        LOGGER.info("User was successfully found");
-        return user;
+                .findAny().orElseThrow(UserInfoMissingException::new).toString();
     }
 
     @Override
