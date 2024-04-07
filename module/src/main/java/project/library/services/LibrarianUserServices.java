@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface LibrarianUserServices {
 
-    void registerUser(User user);
+    User registerUser(User user);
 
     void removeUser(User user);
 
-    User retrieveUserInfo(Long id) throws UserInfoMissingException;
+    String retrieveUserInfo(Long id) throws UserInfoMissingException;
 
     List<User> getAllUsers();
 
