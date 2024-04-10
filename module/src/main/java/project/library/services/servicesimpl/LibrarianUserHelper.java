@@ -22,7 +22,7 @@ public class LibrarianUserHelper implements LibrarianUserServices {
     public LibrarianUserHelper() {
         library = new Library();
         users = new ArrayList<>();
-        books = library.books;
+        books = library.getBooks();
     }
 
     @Override

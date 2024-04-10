@@ -1,7 +1,6 @@
 package project.library.user.impl;
 
 import project.library.Library;
-import project.library.exception.BookNotFoundException;
 import project.library.model.Book;
 import project.library.mybooks.BookDetails;
 
@@ -18,21 +17,20 @@ public class BookDetailsImpl implements BookDetails {
     public BookDetailsImpl() {
         user = new UserImpl();
         Library library = new Library();
-        libraryBooks = library.books;
+        libraryBooks = library.getBooks();
     }
 
-    public String getBookInfo(String name) throws BookNotFoundException {
-        Long id = Long.parseLong(name);
+    public String getBookInfo(String name){
+
 
         for (Book libraryBook : libraryBooks) {
             if (libraryBook.getTitle().equalsIgnoreCase(name)) {
                 return getBookInfoByTitle(name);
             } else if (libraryBook.getAuthor().equalsIgnoreCase(name)) {
                 return getBookInfoByAuthor(name);
-            } else if (Objects.equals(libraryBook.getId(), id)) {
+            } else  {
+                Long id = Long.parseLong(name);
                 return getBookInfoById(id);
-            } else {
-                throw new BookNotFoundException("Information is missing..");
             }
         }
         return name;

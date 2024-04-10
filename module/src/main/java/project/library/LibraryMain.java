@@ -23,7 +23,7 @@ public class LibraryMain {
 
     public LibraryMain() {
         Library library = new Library();
-        books = library.books;
+        books = library.getBooks();
     }
 
     public List<Book> getAllBooksFromDatabase() {

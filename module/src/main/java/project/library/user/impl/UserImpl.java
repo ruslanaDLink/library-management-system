@@ -25,7 +25,7 @@ public class UserImpl implements UserInterface, MyBooks {
         readBooks = new ArrayList<>();
         library = new Library();
         librarianBookHelper = new LibrarianBookHelper();
-        libraryBooks = library.books;
+        libraryBooks = library.getBooks();
     }
 
     @Override

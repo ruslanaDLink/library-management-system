@@ -21,7 +21,7 @@ public class LibrarianBookHelper implements LibrarianBookServices {
     private static final Logger LOGGER = Logger.getLogger(LibrarianBookHelper.class.getName());
 
     private Connection connection = DatabaseManager.connectToDatabase();
-    List<Book> books = new Library().books;
+    List<Book> books = new Library().getBooks();
 
     public LibrarianBookHelper() {
     }
