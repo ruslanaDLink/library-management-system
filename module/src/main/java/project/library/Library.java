@@ -9,12 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Library {
-    public List<Book> books;
+    private List<Book> books;
 
     public Library() {
         books = new ArrayList<>();
     }
 
+    public static void main(String[] args) throws SQLException {
+        Library library = new Library();
+        library.fillCollection();
+    }
 
     public void fillCollection() throws SQLException {
         LibrarianBookHelper librarianBookHelper = new LibrarianBookHelper();
@@ -44,8 +48,8 @@ public class Library {
         librarianBookHelper.add(joanRowlingHarryPotter7Part);
     }
 
-    public static void main(String[] args) throws SQLException {
-        Library library = new Library();
-        library.fillCollection();
+    public List<Book> getBooks() {
+        return books;
     }
+
 }

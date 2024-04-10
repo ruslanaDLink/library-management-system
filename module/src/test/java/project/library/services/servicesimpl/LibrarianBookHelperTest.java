@@ -21,7 +21,7 @@ class LibrarianBookHelperTest {
     @BeforeEach
     void setUp() {
         Library library = new Library();
-        books = library.books;
+        books = library.getBooks();
         librarianServices = new LibrarianBookHelper();
     }
 
